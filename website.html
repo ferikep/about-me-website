@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Francisc Pap — About Me</title>
+  <meta name="description" content="About me, projects, skills, and contact information for internship applications." />
+  <style>
+    :root{
+      --bg:#0d1117;
+      --panel:#0f172a;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --accent:#60a5fa;
+      --accent-2:#34d399;
+      --chip:#1f2937;
+      --border:#1f2937;
+      --link:#93c5fd;
+      --shadow: 0 8px 24px rgba(0,0,0,.25);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: linear-gradient(180deg, #0b1020, var(--bg));
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    header{
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap:20px;
+      align-items:center;
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    .avatar{
+      width:92px; height:92px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #2f3b51, #141a26);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:28px; color:#dbeafe;
+      border:2px solid #1f2937;
+      user-select:none;
+    }
+    .head{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .name{
+      font-size: clamp(22px, 3.8vw, 34px);
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    .title{
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .links{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:12px; border:1px solid var(--border);
+      background:#0b1324; color:var(--text);
+      box-shadow: 0 2px 0 rgba(0,0,0,.25) inset;
+      transition: transform .05s ease;
+      font-size:14px;
+    }
+    .btn:hover{ text-decoration:none; transform: translateY(-1px); }
+    .btn.primary{ background: linear-gradient(180deg, #1f4fff, #1a3fb8); border-color:#1b3aa6; }
+    .btn.primary:hover{ filter:brightness(1.05); }
+    main{
+      display:grid; gap:18px; margin-top:18px;
+      grid-template-columns: 1fr;
+    }
+    section{
+      background: rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    h2{
+      margin:0 0 12px 0;
+      font-size: 18px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      color:#c7d2fe;
+    }
+    .grid{
+      display:grid; gap:12px;
+    }
+    @media (min-width: 820px){
+      main{
+        grid-template-columns: 1.4fr 1fr;
+      }
+      .span-2{ grid-column: 1 / -1; }
+    }
+    .summary{
+      color:#e2e8f0;
+      font-size: 15.5px;
+    }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      padding:6px 10px; border-radius:999px; background:var(--chip);
+      border:1px solid var(--border); font-size:13px; color:#d1d5db;
+    }
+    .item{
+      display:flex; gap:12px; padding:12px; border-radius:12px;
+      border:1px dashed #233049; background: #0c152a;
+    }
+    .item .meta{ flex:1; }
+    .meta h3{ margin:0; font-size:16px; }
+    .meta .sub{ color:var(--muted); font-size:13px; margin-top:2px; }
+    .meta p{ margin:8px 0 0; color:#e5e7eb; font-size:14.5px; }
+    .badge{
+      font: 600 11px var(--mono);
+      padding:3px 6px; border-radius:6px;
+      background: #0b1b36; color:#a5b4fc; border:1px solid #1f2b4d;
+      align-self:start;
+      white-space:nowrap;
+    }
+    .project-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .meta .stack{ margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+    .stack span{
+      padding:4px 8px; border-radius:999px; background:#111827; border:1px solid #233049; font-size:12px; color:#cbd5e1;
+    }
+    footer{
+      margin: 18px 0 30px;
+      color: var(--muted); font-size:13px; text-align:center;
+    }
+    
+    @media print{
+      body{ background:white; color:#111827; }
+      section, header{ box-shadow:none; border:1px solid #e5e7eb; background:white; }
+      a{ color:#1d4ed8; }
+      .btn{ border:1px solid #e5e7eb; background:#f9fafb; box-shadow:none; }
+      .avatar{ border-color:#e5e7eb; background:#f3f4f6; color:#1f2937; }
+      .badge{ background:#eef2ff; color:#3730a3; border-color:#c7d2fe; }
+      .chip, .stack span{ background:#f3f4f6; border-color:#e5e7eb; color:#111827; }
+      .item{ background:white; border:1px solid #e5e7eb; }
+      .links .btn.primary{ background:#e0e7ff; border-color:#c7d2fe; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="avatar" aria-hidden="true">YN</div>
+      <div class="head">
+        <div class="name">Francisc Pap</div>
+        <div class="title">3rd Year BSc of Compter Science at University College Dublin • Seeking a Software Engineering Internship</div>
+        <div class="links" aria-label="Key links">
+          <a class="btn primary" href="mailto:ferike.pap@gmail.com">Email</a>
+          <a class="btn" href="tel:+353894418000">Call</a>
+          <a class="btn" href="https://www.linkedin.com/in/francisc-pap-a8b960330" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/FerikePap" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="YOUR_CV_LINK" target="_blank" rel="noopener">Download CV</a>
+          <a class="btn" href="#contact">Contact Form</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="span-2">
+        <h2>Profile</h2>
+        <p class="summary">
+          3rd-year UCD student seeking a 6-month internship from March. I enjoy building clean, well-tested software and running reliable services. Core Skills: Python, C, Java, SQL, Git, Docker/Compose, Linux administration (Unraid),
+          Monitoring & logging, Backup & Recovery.
+        </p>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <div class="grid">
+          <div>
+            <div class="chips" aria-label="Technical skills">
+              <span class="chip">Python</span>
+              <span class="chip">Java</span>
+              <span class="chip">C</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Git & GitHub</span>
+              <span class="chip">Latex</span>
+              <span class="chip">Testing (JUnit)</span>
+              <span class="chip">Raspberry Pi</span>
+              <span class="chip">Linux</span>
+              <span class="chip">Monitoring & logging</span>
+            </div>
+          </div>
+          <div>
+            <div class="chips" aria-label="Soft skills">
+              <span class="chip">Teamwork</span>
+              <span class="chip">Communication</span>
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Time Management</span>
+              <span class="chip">Adaptability</span>
+              <span class="chip">Ownership</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="item">
+          <div class="badge">2022 — 2026</div>
+          <div class="meta">
+            <h3>University College Dublin, BSc Computer Science</h3>
+            <div class="sub">GPA: First Class Honours (1:1) • Relevant Modules: Data Structures & Algorithms, Operating Systems, Databases, Computer Networking.</div>
+            <p>Highlights: Recipient of the Cothrom ne Féinne Scholarship, UCD Entrance Scholar Award.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="span-2">
+        <h2>Projects</h2>
+
+        <div class="item">
+          <div class="badge">Featured</div>
+          <div class="meta">
+            <h3>HomeLab Media Platform - Unraid + Plex</h3>
+            <div class="sub">Role: Developer • Outcome: 20 users and up to 8 concurrent 1080p streams, 99.9% uptime</div>
+            <p>Operate a 20TB parity protected Unraid server hosting Plex for friends and family, focusing on reliability, security and ease of access.</p>
+            <div class="stack">
+              <span>Unraid</span><span>Docker/Compose</span><span>Plex</span><span>Sonarr/Radarr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="badge">Collaborative Project</div>
+          <div class="meta">
+            <h3>HexOust - Interactive JavaFX hex-grid strategy game with capture mechanics.</h3>
+            <div class="sub">Team of 3, Agile sprints</div>
+            <p>Led a 3-person agile team to make a JavaFX hex strategy game with an axial grid engine, BFS capture logic and themed UI. We used fortnightly sprints, peer PR reviews and tests to ensure everything worked as intended.</p>
+            <div class="stack">
+              <span>Java</span><span>JavaFX</span><span>JUnit 5</span><span>Agile Sprints</span><span>Game Logic</span>
+            </div>
+            <div class="project-actions">
+              <a class="btn" href="https://github.com/swhelan123/SEP2" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="span-2">
+        <h2>Coursework Highlights</h2>
+        <div class="item">
+          <div class="badge">Module</div>
+          <div class="meta">
+            <h3>Data Structures & Algorithms</h3>
+            <div class="sub">Grade Achieved : A</div>
+            <p>Complexity Analysis, Implementations of data structures from scratch (tested with JUnit), Sorting and searching algorithms and dynamic programming.
+            </p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="badge">Module</div>
+          <div class="meta">
+            <h3>Operating Systems</h3>
+            <div class="sub">Grade Achieved : A+</div>
+            <p>Processes/threads, scheduling, memory management, Linux and synchronisation.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="badge">Module</div>
+          <div class="meta">
+            <h3>Databases and Information Systems</h3>
+            <div class="sub">Grade Achieved : B+</div>
+            <p>Learned relational databases, database design methodlogies, and built a database to model a company's hiring process.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="span-2">
+        <h2>Contact</h2>
+        <form
+          class="grid"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="https://formspree.io/f/mzzawrwy"
+        >
+          <input type="hidden" name="form-name" value="contact">
+          <div style="display:none">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </div>
+          <div class="grid" style="grid-template-columns:1fr; gap:10px;">
+            <input required name="name" placeholder="Your name" style="padding:12px;border-radius:10px;border:1px solid var(--border);background:#0b1324;color:var(--text)">
+            <input required type="email" name="email" placeholder="Your email" style="padding:12px;border-radius:10px;border:1px solid var(--border);background:#0b1324;color:var(--text)">
+            <textarea required name="message" rows="5" placeholder="Your message" style="padding:12px;border-radius:10px;border:1px solid var(--border);background:#0b1324;color:var(--text)"></textarea>
+            <button class="btn primary" type="submit">Send</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="y"></span> Francisc Pap • Built with HTML/CSS • Last updated <span id="updated"></span>
+    </footer>
+  </div>
+
+  <script>
+    // Footer year and date
+    const d = new Date();
+    document.getElementById('y').textContent = d.getFullYear();
+    document.getElementById('updated').textContent = d.toLocaleDateString(undefined, {year:'numeric', month:'short'});
+  </script>
+</body>
+</html>
